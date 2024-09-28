@@ -59,7 +59,7 @@ app.post('/shorten', async (req, res) => {
     });
 
     await newUrl.save();
-    res.send({ shortUrl: `${req.protocol}://${req.get('host')}/${shortUrl}` });
+    res.send({ shortUrl: `${port}/${shortUrl}` });
 });
 
 // Handle URL redirection and collect data
