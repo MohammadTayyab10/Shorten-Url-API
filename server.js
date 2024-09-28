@@ -5,9 +5,16 @@ const shortid = require('shortid');
 const cors = require('cors');
 const app = express();
 
+// CORS setup to allow all origins
+const corsOptions = {
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST'], // Allow specific methods
+    allowedHeaders: ['Content-Type'], // Allow specific headers
+};
+
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions)); // Apply CORS middleware with options
 
 // MongoDB connection with mongoose
 mongoose.connect(process.env.MONGO_URI, {
