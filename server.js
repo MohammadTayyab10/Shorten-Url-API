@@ -41,7 +41,8 @@ app.post('/shorten', async (req, res) => {
     });
 
     await newUrl.save();
-    res.send({ shortUrl: `http://localhost:${process.env.PORT}/${shortUrl}` });
+    res.send({ shortUrl: `${req.protocol}://${req.get('host')}/${shortUrl}` });
+
 });
 
 // Handle URL redirection and collect data
@@ -66,6 +67,7 @@ app.get('/:shortUrl', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server running on http://localhost:${process.env.PORT}`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
